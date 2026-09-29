@@ -50,4 +50,20 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboarding3Body =>
       'Pay with cash or your wallet, and see the fare before you ride.';
+
+  @override
+  String get welcomeTitle => 'Your city, your taxi';
+
+  @override
+  String get welcomeBody =>
+      'Move around Afghanistan easily, safely and at a fair price.';
+
+  @override
+  String get welcomeCreateAccount => 'Create account';
+
+  @override
+  String get welcomeHaveAccount => 'Already have an account?';
+
+  @override
+  String get welcomeLogin => 'Log in';
 }

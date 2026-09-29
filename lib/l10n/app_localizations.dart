@@ -177,6 +177,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pay with cash or your wallet, and see the fare before you ride.'**
   String get onboarding3Body;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your city, your taxi'**
+  String get welcomeTitle;
+
+  /// No description provided for @welcomeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Move around Afghanistan easily, safely and at a fair price.'**
+  String get welcomeBody;
+
+  /// No description provided for @welcomeCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get welcomeCreateAccount;
+
+  /// No description provided for @welcomeHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get welcomeHaveAccount;
+
+  /// No description provided for @welcomeLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in'**
+  String get welcomeLogin;
 }
 
 class _AppLocalizationsDelegate

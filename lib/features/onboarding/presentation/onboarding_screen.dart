@@ -31,8 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _finish() {
-    // TEMPORARY: goes to the developer home until the Welcome screen exists.
-    context.go(AppRoutes.dev);
+    context.go(AppRoutes.welcome);
   }
 
   void _next() {

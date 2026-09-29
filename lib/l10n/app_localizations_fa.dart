@@ -50,4 +50,20 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get onboarding3Body =>
       'با پول نقد یا کیف پول پرداخت کنید و پیش از سفر کرایه را ببینید.';
+
+  @override
+  String get welcomeTitle => 'شهر شما، تاکسی شما';
+
+  @override
+  String get welcomeBody =>
+      'در افغانستان به آسانی، با امنیت و با کرایه مناسب سفر کنید.';
+
+  @override
+  String get welcomeCreateAccount => 'ایجاد حساب';
+
+  @override
+  String get welcomeHaveAccount => 'قبلاً حساب دارید؟';
+
+  @override
+  String get welcomeLogin => 'ورود';
 }

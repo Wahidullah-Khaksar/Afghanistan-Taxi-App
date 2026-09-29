@@ -49,5 +49,21 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get onboarding3Body =>
-      'له خپلې بټوي څخه نغدې پیسې ورکړئ، او مخکې له سفره کرایه وګورئ.';
+      'په نغدو یا خپل بټوه کې پیسې ورکړئ، او مخکې له سفره کرایه وګورئ.';
+
+  @override
+  String get welcomeTitle => 'ستاسو ښار، ستاسو ټکسي';
+
+  @override
+  String get welcomeBody =>
+      'په افغانستان کې په اسانۍ، خوندیتوب او مناسب کرایه سفر وکړئ.';
+
+  @override
+  String get welcomeCreateAccount => 'حساب جوړ کړئ';
+
+  @override
+  String get welcomeHaveAccount => 'مخکې حساب لرئ؟';
+
+  @override
+  String get welcomeLogin => 'ننوتل';
 }

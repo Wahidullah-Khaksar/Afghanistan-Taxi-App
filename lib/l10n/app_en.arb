@@ -15,5 +15,10 @@
   "onboarding2Title": "Safe and trusted rides",
   "onboarding2Body": "See your driver's details, share your trip with family and get help any time.",
   "onboarding3Title": "Pay the way you like",
-  "onboarding3Body": "Pay with cash or your wallet, and see the fare before you ride."
+  "onboarding3Body": "Pay with cash or your wallet, and see the fare before you ride.",
+  "welcomeTitle": "Your city, your taxi",
+  "welcomeBody": "Move around Afghanistan easily, safely and at a fair price.",
+  "welcomeCreateAccount": "Create account",
+  "welcomeHaveAccount": "Already have an account?",
+  "welcomeLogin": "Log in"
 }
