@@ -3,5 +3,14 @@
   "appName": "افغان ټکسي",
   "splashTagline": "خوندي، چټک او د باور وړ سفر",
   "phaseOneReady": "د لومړي پړاو تنظیم بشپړ شو",
-  "chooseLanguage": "ژبه"
+  "chooseLanguage": "ژبه",
+  "onboardingSkip": "پرېښودل",
+  "onboardingNext": "بل",
+  "onboardingGetStarted": "پیل کړئ",
+  "onboarding1Title": "ټکسي په څو ثانیو کې ونیسئ",
+  "onboarding1Body": "د سپرېدو ځای او منزل وټاکئ، او نږدې ټکسي به تاسو ته راشي.",
+  "onboarding2Title": "خوندي او د باور وړ سفر",
+  "onboarding2Body": "د موټروان معلومات وګورئ، خپل سفر له کورنۍ سره شریک کړئ، او هر وخت مرسته ترلاسه کړئ.",
+  "onboarding3Title": "لکه څنګه چې غواړئ ورکړه وکړئ",
+  "onboarding3Body": "له خپلې بټوي څخه نغدې پیسې ورکړئ، او مخکې له سفره کرایه وګورئ."
 }

@@ -36,5 +36,5 @@ abstract final class AppConfig {
     AppLanguage(locale: Locale('ps'), nativeName: 'پښتو'),
   ];
 
-  static const Locale defaultLocale = Locale('en');
+  static const Locale defaultLocale = Locale('ps');
 }

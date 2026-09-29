@@ -1,96 +1,138 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/config/app_config.dart';
 import '../../../core/constants/app_icons.dart';
 import '../../../core/router/app_router.dart';
-import '../../../core/widgets/secondary_button.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../settings/presentation/providers/locale_provider.dart';
-import '../../settings/presentation/providers/theme_mode_provider.dart';
 
-/// Temporary screen. It proves that the architecture, localization, RTL,
-/// light/dark themes and the reusable widgets work.
-/// The real animated splash is built in Phase 4.
-class SplashScreen extends ConsumerWidget {
+/// First screen of the app: brand color background, animated logo badge,
+/// app name and tagline. After a short time it moves to the next screen.
+///
+/// If the phone has "remove animations" turned on (accessibility), the
+/// animation is skipped and everything is shown immediately.
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final currentLocale = ref.watch(localeProvider);
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final isDark = theme.brightness == Brightness.dark;
+  State<SplashScreen> createState() => _SplashScreenState();
+}
 
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1200),
+  );
+
+  late final Animation<double> _logoScale = Tween<double>(begin: 0.7, end: 1)
+      .animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: const Interval(0, 0.6, curve: Curves.easeOutBack),
+        ),
+      );
+
+  late final Animation<double> _logoFade = CurvedAnimation(
+    parent: _controller,
+    curve: const Interval(0, 0.5, curve: Curves.easeOut),
+  );
+
+  late final Animation<double> _textFade = CurvedAnimation(
+    parent: _controller,
+    curve: const Interval(0.4, 1, curve: Curves.easeOut),
+  );
+
+  Timer? _timer;
+  bool _started = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_started) return;
+    _started = true;
+
+    if (MediaQuery.of(context).disableAnimations) {
+      _controller.value = 1;
+    } else {
+      _controller.forward();
+    }
+    _timer = Timer(const Duration(milliseconds: 2200), _goNext);
+  }
+
+  void _goNext() {
+    if (!mounted) return;
+    // Later this will skip onboarding for returning users.
+    context.go(AppRoutes.onboarding);
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final textTheme = Theme.of(context).textTheme;
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        backgroundColor: AppColors.primaryDark,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(AppIcons.taxi, size: 72, color: theme.colorScheme.primary),
-                const SizedBox(height: 16),
-                Text(
-                  l10n.appName,
-                  style: textTheme.headlineMedium,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  l10n.splashTagline,
-                  style: textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                Text(l10n.phaseOneReady, style: textTheme.titleMedium),
-                const SizedBox(height: 32),
-                Text(l10n.chooseLanguage, style: textTheme.labelLarge),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    for (final language in AppConfig.languages)
-                      ChoiceChip(
-                        label: Text(language.nativeName),
-                        selected: currentLocale == language.locale,
-                        onSelected: (_) => ref
-                            .read(localeProvider.notifier)
-                            .setLocale(language.locale),
+                FadeTransition(
+                  opacity: _logoFade,
+                  child: ScaleTransition(
+                    scale: _logoScale,
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
                       ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                // Temporary switch to test the dark theme. The real,
-                // localized version belongs to the Settings screen.
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(AppIcons.darkMode),
-                    const SizedBox(width: 8),
-                    Switch(
-                      value: isDark,
-                      onChanged: (value) => ref
-                          .read(themeModeProvider.notifier)
-                          .setThemeMode(
-                            value ? ThemeMode.dark : ThemeMode.light,
-                          ),
+                      child: const Icon(
+                        AppIcons.taxi,
+                        size: 64,
+                        color: AppColors.primaryDark,
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-                const SizedBox(height: 24),
-                // TEMPORARY button that opens the developer widgets screen.
-                SecondaryButton(
-                  label: 'Widgets demo',
-                  icon: AppIcons.settings,
-                  onPressed: () => context.push(AppRoutes.widgetsDemo),
+                const SizedBox(height: 28),
+                FadeTransition(
+                  opacity: _textFade,
+                  child: Column(
+                    children: [
+                      Text(
+                        l10n.appName,
+                        style: textTheme.headlineMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        l10n.splashTagline,
+                        style: textTheme.bodyLarge?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.85),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

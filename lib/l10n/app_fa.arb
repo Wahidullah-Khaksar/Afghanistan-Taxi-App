@@ -3,5 +3,14 @@
   "appName": "تاکسی افغان",
   "splashTagline": "سفر امن، سریع و قابل اعتماد",
   "phaseOneReady": "تنظیمات مرحله اول کامل شد",
-  "chooseLanguage": "زبان"
+  "chooseLanguage": "زبان",
+  "onboardingSkip": "رد کردن",
+  "onboardingNext": "بعدی",
+  "onboardingGetStarted": "شروع کنید",
+  "onboarding1Title": "تاکسی را در چند ثانیه بگیرید",
+  "onboarding1Body": "محل سوار شدن و مقصد را انتخاب کنید تا نزدیکترین تاکسی به سوی شما بیاید.",
+  "onboarding2Title": "سفر امن و قابل اعتماد",
+  "onboarding2Body": "معلومات راننده را ببینید، سفر خود را با خانواده شریک سازید و هر وقت کمک بگیرید.",
+  "onboarding3Title": "به روش دلخواه پرداخت کنید",
+  "onboarding3Body": "با پول نقد یا کیف پول پرداخت کنید و پیش از سفر کرایه را ببینید."
 }
